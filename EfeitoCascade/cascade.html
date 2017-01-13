@@ -1,0 +1,69 @@
+<html>
+<head>
+ <!-- AngularJS -->
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script> 
+
+  <!--Spinner -->
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.js"></script>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-spinner/0.5.1/angular-spinner.js"></script>
+
+</head>
+<body ng-app="appExemplo" ng-controller="exemploController">
+
+	<!-- Spinner -->
+	<div ng-if="processando" us-spinner></div>
+ 
+	<select ng-options="s.nome for s in setores track by s.codigo" ng-model="setorSelecionado">
+		<option value="">Selecione</option>
+	</select>
+	
+	<select ng-options="p.nome for p in setorSelecionado.funcionarios track by p.codigo" ng-model="funcionarioSelecionado">
+		<option value="">Selecione</option>
+	</select>
+
+ <!--Botão para ativar ou desativar o Spinner --> 
+ <button ng-click="ativar()"> Ativar </button>
+<script>
+var appExemplo = angular.module('appExemplo', ['angularSpinner']);
+
+//Criando o controller
+appExemplo.controller('exemploController', function ($scope) {
+
+	var setor = [
+		{
+		codigo: 1,
+		nome: 'TI',
+		funcionarios:
+			[
+				{ codigo: 1, nome: 'Valério Gualdim Ginjeira' },
+				{ codigo: 2, nome: 'Márcio Hermesinda Santiago' },
+				{ codigo: 3, nome: 'João Mem Valgueiro' }
+			]
+		},
+		{
+		codigo: 2,
+		nome: 'Comercial',
+		funcionarios:
+			[
+				{ codigo: 4, nome: 'Débora Eduardo Salgado' },
+				{ codigo: 5, nome: 'Feliciano Parcidio Moura' },
+				{ codigo: 6, nome: 'Ana Fulvio Fortunato' }
+			]
+		}
+	];
+  
+	
+
+	$scope.setores = setor;
+	$scope.setorSelecionado = {};
+	$scope.funcionarioSelecionado = {};
+
+  //Criando o método Ativar
+  $scope.ativar = function(){
+    //Exibe ou não o Spinner
+    $scope.processando= !$scope.processando;
+  };
+});
+</script>
+</body>
+</html>
