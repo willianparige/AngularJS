@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="app.js"></script>    
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css">
+	<style>
+	.concluida-true {
+		text-decoration: line-through;
+		color: grey;
+	}
+	</style>
+  </head>
+  <body ng-app="mainApp">
+    <h2>Todo List</h2>
+    <div ng-controller="mainController">
+      <span>{{lembretes()}} de {{todos.length}} lembretes</span>
+      [ <a href="" ng-click="removeConcluidas()">Remover Finalizadas</a> ]
+      <ul class="unstyled">
+        <li ng-repeat="todo in todos">
+          <label class="checkbox">
+            <input type="checkbox" ng-model="todo.concluida">
+            <span class="concluida-{{todo.concluida}}">{{todo.texto}}</span>
+          </label>
+        </li>
+      </ul>
+      <form ng-submit="adicionar()">
+        <input type="text" ng-model="novoTexto"  size="30" placeholder="Nova">
+        <input class="btn-primary" type="submit" value="Adicionar">
+      </form>
+    </div>
+  </body>
+</html>
